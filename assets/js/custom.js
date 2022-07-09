@@ -16,7 +16,6 @@ const countDown = () => {
     // Find the distance between now and the count down date
     var distance = countDownDate - now;
 
-    // Time calculations for days, hours, minutes and seconds
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
     var hours = Math.floor(
       (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -24,12 +23,36 @@ const countDown = () => {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    displayTimeLeft(days, hours, minutes, seconds);
+    let formattedDay = days.toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+
+    let formattedHours = hours.toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    let formattedMinutes = minutes.toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    let formattedSeconds = seconds.toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+
+    // Time calculations for days, hours, minutes and seconds
+
+    displayTimeLeft(
+      formattedDay,
+      formattedHours,
+      formattedMinutes,
+      formattedSeconds
+    );
 
     // If the count down is finished, write some text
     if (distance < 0) {
       clearInterval(x);
-      //   document.getElementById("demo").innerHTML = "EXPIRED";
       var element = document.getElementById("counDown");
       element.classList.add("visually-hidden");
     }
